@@ -1,0 +1,46 @@
+apply plugin: 'com.android.application'
+//引入dagger2 的apt插件
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion rootProject.ext.androidCompileSdkVersion
+    buildToolsVersion rootProject.ext.androidBuildToolsVersion
+
+    defaultConfig {
+        applicationId "dly.gank2"
+        minSdkVersion rootProject.ext.androidMinSdkVersion
+        targetSdkVersion rootProject.ext.androidTargetSdkVersion
+        versionCode rootProject.ext.androidVersionCode
+        versionName rootProject.ext.androidVersionName
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+
+def dependency = rootProject.ext.dependencies
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile dependency['appcompat']
+    compile dependency['design']
+    compile dependency['recyclerView']
+    compile dependency['cardView']
+    compile dependency['butterKnife']
+    compile dependency['rxJava']
+    compile dependency['rxAndroid']
+    compile dependency['retrofit']
+    compile dependency['converterGson']
+    compile dependency['adapterRxjava']
+    compile dependency['gson']
+    compile dependency['glide']
+
+    apt dependency['daggerCompiler']
+    compile dependency['dagger']
+    compile dependency['javaxAnnotation']
+}
